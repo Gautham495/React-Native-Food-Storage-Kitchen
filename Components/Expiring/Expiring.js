@@ -17,9 +17,20 @@ const Expiring = () => {
   const {ingredients} = useSelector(state => state.MainReducer);
 
     return (
-        <View>
-            
-        </View>
+      <ScrollView>
+      <View>
+        <Text>Cart</Text>
+      </View>
+      {/* <View>
+        {ingredients.map(item => (
+          <View key={Math.random()}>
+            <View>
+              <Text>{item.ingredientName}</Text>
+            </View>
+          </View>
+        ))}
+      </View> */}
+    </ScrollView>
     )
 }
 

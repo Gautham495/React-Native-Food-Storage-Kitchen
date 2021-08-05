@@ -18,13 +18,17 @@ const Home = () => {
   const [location, setLocation] = useState('');
   const [confectionType, setConfectionType] = useState('');
 
-  // const [entryDate, setEntryDate] = useState('');
+  const [entryDate, setEntryDate] = useState('');
 
   const [expiryDate, setExpiryDate] = useState('');
 
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+
+  const [date1, setDate1] = useState(new Date());
+  const [mode1, setMode1] = useState('date');
+  const [show1, setShow1] = useState(false);
 
   const dispatch = useDispatch();
   const {ingredients} = useSelector(state => state.MainReducer);
@@ -42,6 +46,21 @@ const Home = () => {
 
   const showDatepicker = () => {
     showMode('date');
+  };
+
+  const onChangeStart1 = (event, selectedDate) => {
+    // setStartDate(dayjs(selectedDate).format('DD-MM-YYYY'));
+    setEntryDate(selectedDate.toLocaleDateString());
+    setShow1(false);
+  };
+
+  const showMode1 = currentMode => {
+    setShow1(true);
+    setMode1(currentMode);
+  };
+
+  const showDatepicker1 = () => {
+    showMode1('date');
   };
 
   const addIngredients = () => {
@@ -68,111 +87,153 @@ const Home = () => {
   const confectionTypes = ['fresh', 'canned', 'frozen', 'cured'];
 
   return (
-    <View style={{alignItems: 'center'}}>
-      <View>
-        <TextInput
-          style={styles.input}
-          onChangeText={e => setName(e)}
-          value={name}
-          placeholder="Ingredient Name*"
-        />
-      </View>
-      <View>
-        <SelectDropdown
-          data={categories}
-          defaultButtonText={'Select Ingredient Category'}
-          buttonStyle={styles.input}
-          buttonTextStyle={{color: 'black', fontSize: 14}}
-          onSelect={(selectedItem, index) => {
-            setCategory(selectedItem);
-            console.log(selectedItem, index);
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
-        />
-      </View>
-      <View>
-        <SelectDropdown
-          data={locations}
-          defaultButtonText={'Select Ingredient Location'}
-          buttonStyle={styles.input}
-          buttonTextStyle={{color: 'black', fontSize: 14}}
-          onSelect={(selectedItem, index) => {
-            setLocation(selectedItem);
-            console.log(selectedItem, index);
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
-        />
-      </View>
-      <View>
-        <SelectDropdown
-          data={confectionTypes}
-          defaultButtonText={'Select Confection Type'}
-          buttonStyle={styles.input}
-          buttonTextStyle={{color: 'black', fontSize: 14}}
-          onSelect={(selectedItem, index) => {
-            setConfectionType(selectedItem);
-            console.log(selectedItem, index);
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
-        />
-      </View>
-      <View>
+    <ScrollView>
+      <View style={{alignItems: 'center'}}>
         <View>
-          <View style={{marginTop: 10}}>
-            <TouchableOpacity
-              style={[styles.input, {alignItems: 'center', height: 50}]}
-              onPress={showDatepicker}>
-              <Text style={{marginTop: 10, fontFamily: 'Poppins-Medium'}}>
-                {date ? (
-                  <Text>{date}</Text>
-                ) : (
-                  <Text style={{fontFamily: 'Poppins-Medium'}}>
-                    Select Expiry Date
-                  </Text>
-                )}
-              </Text>
-            </TouchableOpacity>
+          <TextInput
+            style={styles.input}
+            onChangeText={e => setName(e)}
+            value={name}
+            placeholder="Ingredient Name"
+          />
+        </View>
+        <View>
+          <SelectDropdown
+            data={categories}
+            defaultButtonText={'Select Ingredient Category'}
+            buttonStyle={styles.input}
+            buttonTextStyle={{color: 'black', fontSize: 14}}
+            onSelect={(selectedItem, index) => {
+              setCategory(selectedItem);
+              console.log(selectedItem, index);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+          />
+        </View>
+        <View>
+          <SelectDropdown
+            data={locations}
+            defaultButtonText={'Select Ingredient Location'}
+            buttonStyle={styles.input}
+            buttonTextStyle={{color: 'black', fontSize: 14}}
+            onSelect={(selectedItem, index) => {
+              setLocation(selectedItem);
+              console.log(selectedItem, index);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+          />
+        </View>
+        <View>
+          <SelectDropdown
+            data={confectionTypes}
+            defaultButtonText={'Select Confection Type'}
+            buttonStyle={styles.input}
+            buttonTextStyle={{color: 'black', fontSize: 14}}
+            onSelect={(selectedItem, index) => {
+              setConfectionType(selectedItem);
+              console.log(selectedItem, index);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+          />
+        </View>
+        <View>
+          <View>
+            <View style={{marginTop: 10}}>
+              <TouchableOpacity
+                style={[styles.input, {alignItems: 'center', height: 50}]}
+                onPress={showDatepicker1}>
+                <Text style={{marginTop: 10, fontFamily: 'Poppins-Medium'}}>
+                  {entryDate ? (
+                    <Text>{entryDate}</Text>
+                  ) : (
+                    <Text style={{fontFamily: 'Poppins-Medium'}}>
+                      Select Entry Date
+                    </Text>
+                  )}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            {show1 && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date1}
+                mode={mode1}
+                is24Hour={true}
+                display="default"
+                onChange={onChangeStart1}
+              />
+            )}
           </View>
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="default"
-              onChange={onChangeStart}
-            />
-          )}
+        </View>
+        <View>
+          <View>
+            <View style={{marginTop: 10}}>
+              <TouchableOpacity
+                style={[styles.input, {alignItems: 'center', height: 50}]}
+                onPress={showDatepicker}>
+                <Text style={{marginTop: 10, fontFamily: 'Poppins-Medium'}}>
+                  {expiryDate ? (
+                    <Text>{expiryDate}</Text>
+                  ) : (
+                    <Text style={{fontFamily: 'Poppins-Medium'}}>
+                      Select Expiry Date
+                    </Text>
+                  )}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChangeStart}
+              />
+            )}
+          </View>
+        </View>
+
+        <View>
+          <TouchableOpacity
+            style={{
+              alignItems: 'center',
+              backgroundColor: 'blue',
+              borderRadius: 10,
+              ...getShadow(1),
+              width: 200,
+              padding: 10,
+              marginBottom: 30,
+            }}
+            onPress={() => addIngredients()}>
+            <Text
+              style={{
+                fontFamily: 'Poppins-Medium',
+                color: 'white',
+                fontSize: 17,
+              }}>
+              Add
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View>
-        <TouchableOpacity
-          style={{
-            alignItems: 'center',
-            backgroundColor: 'blue',
-            borderRadius: 10,
-            ...getShadow(1),
-          }}
-          onPress={() => addIngredients()}>
-          <Text style={{fontFamily: 'Poppins-Medium', fontSize: 17}}>Add</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
