@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {useSelector, useDispatch} from 'react-redux';
-import {addIngredient, getIngredients} from '../../Redux/Actions/Action';
+import {addIngredient, editIngredients} from '../../Redux/Actions/Action';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
@@ -17,16 +17,18 @@ import dayjs from 'dayjs';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-const Home = ({navigation}) => {
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [location, setLocation] = useState('');
-  const [confectionType, setConfectionType] = useState('');
+const Edit = ({navigation, route}) => {
+  const [name, setName] = useState(route.params.ingredientName);
+  const [category, setCategory] = useState(route.params.category);
+  const [location, setLocation] = useState(route.params.location);
+  const [confectionType, setConfectionType] = useState(
+    route.params.confectionType,
+  );
+  const [ripeness, setRipeness] = useState(route.params.ripeness);
+  const [entryDate, setEntryDate] = useState(route.params.entryDate);
 
-  const [entryDate, setEntryDate] = useState('');
+  const [expiryDate, setExpiryDate] = useState(route.params.expiryDate);
 
-  const [expiryDate, setExpiryDate] = useState('');
-  const [ripeness, setRipeness] = useState('');
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
@@ -68,14 +70,10 @@ const Home = ({navigation}) => {
     showMode1('date');
   };
 
-  const dropdownRef1 = useRef({});
-  const dropdownRef2 = useRef({});
-  const dropdownRef3 = useRef({});
-
-  const addIngredients = () => {
+  const EditIngredients = () => {
     if (name) {
       let formData = {
-        id: Math.random(),
+        id: route.params.id,
         ingredientName: name,
         expiryDate: expiryDate,
         entryDate: entryDate,
@@ -92,12 +90,15 @@ const Home = ({navigation}) => {
       setCategory('');
       setLocation('');
       setConfectionType('');
-      setRipeness('');
-      dropdownRef1.current.reset();
-      dropdownRef2.current.reset();
-      // dropdownRef3.current.reset();
+      setRipeness('')
+      navigation.navigate('Cart');
 
-      dispatch(addIngredient(formData));
+      console.log(route.params.id)
+      
+      console.log(ingredients.filter((item)=>item.id ===route.params.id))
+      
+
+      dispatch(editIngredients(formData));
     } else {
       alert('Please Fill ingredient Name');
     }
@@ -112,14 +113,14 @@ const Home = ({navigation}) => {
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
-        <View style={{marginVertical: 10, marginTop:30}}>
+        <View style={{marginVertical: 10}}>
           <Text
             style={{
               color: 'black',
-              fontSize: 20,
+              fontSize: 16,
               fontFamily: 'Poppins-Medium',
             }}>
-            Enter Details of Ingredient{' '}
+            Edit Details of Ingredient{' '}
           </Text>
         </View>
         <View>
@@ -132,6 +133,7 @@ const Home = ({navigation}) => {
         </View>
         <View>
           <SelectDropdown
+            defaultValue={route.params.category}
             data={categories}
             defaultButtonText={'Select Ingredient Category'}
             buttonStyle={styles.input}
@@ -154,7 +156,7 @@ const Home = ({navigation}) => {
         </View>
         <View>
           <SelectDropdown
-            ref={dropdownRef1}
+            defaultValue={route.params.location}
             data={locations}
             defaultButtonText={'Select Ingredient Location'}
             buttonStyle={styles.input}
@@ -177,7 +179,7 @@ const Home = ({navigation}) => {
         </View>
         <View>
           <SelectDropdown
-            ref={dropdownRef2}
+            defaultValue={route.params.confectionType}
             data={confectionTypes}
             defaultButtonText={'Select Confection Type'}
             buttonStyle={styles.input}
@@ -198,7 +200,6 @@ const Home = ({navigation}) => {
             }}
           />
         </View>
-
         {confectionType === 'fresh' && (
           <View>
             <SelectDropdown
@@ -223,7 +224,6 @@ const Home = ({navigation}) => {
             />
           </View>
         )}
-
         <View>
           <View>
             <View style={{marginTop: 10}}>
@@ -294,14 +294,14 @@ const Home = ({navigation}) => {
               padding: 10,
               marginBottom: 30,
             }}
-            onPress={() => addIngredients()}>
+            onPress={() => EditIngredients()}>
             <Text
               style={{
                 fontFamily: 'Poppins-Medium',
                 color: 'white',
                 fontSize: 17,
               }}>
-              Add
+              Edit
             </Text>
           </TouchableOpacity>
         </View>
@@ -312,6 +312,7 @@ const Home = ({navigation}) => {
 
 const styles = StyleSheet.create({
   input: {
+    // margin: 12,
     marginVertical: 15,
     borderWidth: 1,
     width: 250,
@@ -321,8 +322,9 @@ const styles = StyleSheet.create({
     padding: 5,
     height: 50,
     color: 'black',
+    // marginBottom: 50,
     fontFamily: 'Poppins-Medium',
   },
 });
 
-export default Home;
+export default Edit;

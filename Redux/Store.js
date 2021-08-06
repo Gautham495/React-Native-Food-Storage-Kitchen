@@ -4,4 +4,4 @@ import {persistStore} from 'redux-persist';
 
 export const store = createStore(RootReducer);
 
-export const persistor = persistStore(store)
+// export const persistor = persistStore(store)

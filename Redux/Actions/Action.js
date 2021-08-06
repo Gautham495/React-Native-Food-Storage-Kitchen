@@ -4,10 +4,17 @@ export const Login = () => {
   };
 };
 
-export const addIngredient = (data) => {
+export const addIngredient = data => {
   return {
     type: 'ADD_INGREDIENT',
-    payload:data
+    payload: data,
+  };
+};
+
+export const addToGroceries = data => {
+  return {
+    type: 'ADD_TO_GROCERIES',
+    payload: data,
   };
 };
 
@@ -17,6 +24,16 @@ export const getIngredients = () => {
   };
 };
 
+export const getGroceries = () => {
+  return {
+    type: 'GET_GROCERIES',
+  };
+};
 
 
-
+export const editIngredients = data => {
+  return {
+    type: 'EDIT_INGREDIENTS',
+    payload: data,
+  };
+};

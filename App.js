@@ -4,23 +4,42 @@ import {NavigationContainer} from '@react-navigation/native';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {Image} from 'react-native';
 
-// import {createStackNavigator} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Home from './Components/Home/Home';
 import BarCode from './Components/BarCode/BarCode';
 import Cart from './Components/Cart/Cart';
 import Expiring from './Components/Expiring/Expiring';
-
-// const Stack = createStackNavigator();
+import Edit from './Components/Edit/Edit';
+import Filter from './Components/Filter/Filter';
+import ElementsMissing from './Components/ElementsMissing/ElementsMissing';
+import Category from './Components/Filter/Category';
+import Confection from './Components/Filter/Confection';
+import Location from './Components/Filter/Location';
+import Groceries from './Components/Groceries/Groceries';
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// const HomeScreen = () => {
-//   <Stack.Navigator>
-//     <Stack.Screen name="Profile" component={Profile} />
-//     <Stack.Screen name="Payments Made" component={PaymentsMade} />
-//   </Stack.Navigator>;
-// };
+const FilterScreens = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{headerShown: false}}
+        name="Groceries List"
+        component={Cart}
+      />
+      <Stack.Screen name="Edit" component={Edit}  options={{headerShown: false}}/>
+      <Stack.Screen name="Filter" component={Filter}  options={{headerShown: false}} />
+      <Stack.Screen name="ElementsMissing" component={ElementsMissing}  options={{headerShown: false}} />
+      <Stack.Screen name="Category" component={Category}  options={{headerShown: false}} />
+      <Stack.Screen name="Confection" component={Confection}  options={{headerShown: false}} />
+      <Stack.Screen name="Location" component={Location}  options={{headerShown: false}} />
+      <Stack.Screen name="Groceries" component={Groceries}  options={{headerShown: false}} />
+    
+    </Stack.Navigator>
+  );
+};
 
 const BottomTabs = () => {
   return (
@@ -68,7 +87,7 @@ const BottomTabs = () => {
           ),
         }}
         name="Cart"
-        component={Cart}
+        component={FilterScreens}
       />
       <Tab.Screen
         options={{

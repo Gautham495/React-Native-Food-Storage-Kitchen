@@ -14,5 +14,5 @@ const persistConfig = {
 };
 
 export default combineReducers({
-  MainReducer: persistReducer(persistConfig, MainReducer),
+  MainReducer: MainReducer
 });
