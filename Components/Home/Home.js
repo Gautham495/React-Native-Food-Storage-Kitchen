@@ -68,9 +68,9 @@ const Home = ({navigation}) => {
     showMode1('date');
   };
 
-  const dropdownRef1 = useRef({});
-  const dropdownRef2 = useRef({});
-  const dropdownRef3 = useRef({});
+  // const dropdownRef1 = useRef({});
+  // const dropdownRef2 = useRef({});
+  // const dropdownRef3 = useRef({});
 
   const addIngredients = () => {
     if (name) {
@@ -93,8 +93,8 @@ const Home = ({navigation}) => {
       setLocation('');
       setConfectionType('');
       setRipeness('');
-      dropdownRef1.current.reset();
-      dropdownRef2.current.reset();
+      // dropdownRef1.current.reset();
+      // dropdownRef2.current.reset();
       // dropdownRef3.current.reset();
 
       dispatch(addIngredient(formData));
@@ -154,7 +154,7 @@ const Home = ({navigation}) => {
         </View>
         <View>
           <SelectDropdown
-            ref={dropdownRef1}
+            // ref={dropdownRef1}
             data={locations}
             defaultButtonText={'Select Ingredient Location'}
             buttonStyle={styles.input}
@@ -177,7 +177,7 @@ const Home = ({navigation}) => {
         </View>
         <View>
           <SelectDropdown
-            ref={dropdownRef2}
+            // ref={dropdownRef2}
             data={confectionTypes}
             defaultButtonText={'Select Confection Type'}
             buttonStyle={styles.input}
