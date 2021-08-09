@@ -12,9 +12,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addToGroceries} from '../../Redux/Actions/Action';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
+import { RootState } from '../../Redux/Reducer';
 const Cart = ({navigation}) => {
   const dispatch = useDispatch();
-  const {ingredients} = useSelector(state => state.MainReducer);
+  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
 
   useEffect(() => {
     console.log(

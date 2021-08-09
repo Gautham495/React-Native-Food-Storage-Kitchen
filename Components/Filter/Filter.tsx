@@ -11,11 +11,12 @@ import SelectDropdown from 'react-native-select-dropdown';
 import {useSelector, useDispatch} from 'react-redux';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
+import { RootState } from '../../Redux/Reducer';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const Filter = ({navigation}) => {
-  const {ingredients} = useSelector(state => state.MainReducer);
+  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
 
   return (
     <ScrollView>

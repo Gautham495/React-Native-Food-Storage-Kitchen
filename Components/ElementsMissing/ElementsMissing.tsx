@@ -2,22 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  TextInput,
   ScrollView,
-  TouchableOpacity,
-  StyleSheet,
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
 import {useSelector, useDispatch} from 'react-redux';
-import {addIngredient, getIngredients} from '../../Redux/Actions/Action';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
+import { RootState } from '../../Redux/Reducer';
 const ElementsMissing = () => {
-  const dispatch = useDispatch();
-  const {ingredients} = useSelector(state => state.MainReducer);
-
-  
-
+  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>

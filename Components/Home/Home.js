@@ -8,8 +8,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import {useSelector, useDispatch} from 'react-redux';
-import {addIngredient, getIngredients} from '../../Redux/Actions/Action';
+import {useDispatch} from 'react-redux';
+import {addIngredient} from '../../Redux/Actions/Action';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
@@ -36,12 +36,10 @@ const Home = ({navigation}) => {
   const [show1, setShow1] = useState(false);
 
   const dispatch = useDispatch();
-  const {ingredients} = useSelector(state => state.MainReducer);
 
   const onChangeStart = (event, selectedDate) => {
     setExpiryDate(selectedDate.toLocaleDateString());
     console.log(dayjs(new Date()));
-    // console.log(dayjs(selectedDate))
     setShow(false);
   };
 
@@ -67,10 +65,6 @@ const Home = ({navigation}) => {
   const showDatepicker1 = () => {
     showMode1('date');
   };
-
-  // const dropdownRef1 = useRef({});
-  // const dropdownRef2 = useRef({});
-  // const dropdownRef3 = useRef({});
 
   const addIngredients = () => {
     if (name) {
@@ -105,14 +99,21 @@ const Home = ({navigation}) => {
 
   const ripenessList = ['green', 'ripe/matured', 'advanced', 'too ripe'];
 
-  const categories = ['fruit', 'vegetable', 'dairy', 'fish', 'meat', 'liquid'];
+  const categories = [
+    'fruit',
+    'vegetable',
+    'dairy',
+    'fish',
+    'meat',
+    'liquid',
+  ];
   const locations = ['pantry', 'fridge', 'freezer'];
   const confectionTypes = ['fresh', 'canned', 'frozen', 'cured'];
 
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
-        <View style={{marginVertical: 10, marginTop:30}}>
+        <View style={{marginVertical: 10, marginTop: 30}}>
           <Text
             style={{
               color: 'black',

@@ -1,8 +1,4 @@
 import {combineReducers} from 'redux';
-import {Authenticate} from './Reducers/Reducers';
-import {PdfReducer} from './Reducers/PdfReducer';
-import {ThemeReducer} from './Reducers/ThemeReducer';
-import {RouteReducer} from './Reducers/RouteReducer';
 
 import {persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -13,6 +9,9 @@ const persistConfig = {
   storage: AsyncStorage,
 };
 
-export default combineReducers({
+export const RootReducer = combineReducers({
   MainReducer: MainReducer
 });
+
+export type RootState = ReturnType<typeof RootReducer>
+

@@ -4,18 +4,21 @@ import {
   Text,
   TextInput,
   ScrollView,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 import {useSelector, useDispatch} from 'react-redux';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
+import { RootState } from '../../Redux/Reducer';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-const Location = () => {
-  const [searchLocation, setSearchLocation] = useState('');
+const Confection = () => {
+  const [searchConfection, setSearchConfection] = useState('');
 
-  const {ingredients} = useSelector(state => state.MainReducer);
+  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
 
   return (
     <ScrollView>
@@ -26,20 +29,22 @@ const Location = () => {
           </Text>
         </View>
 
+       
+
         <View>
           <TextInput
             style={styles.input}
-            onChangeText={e => setSearchLocation(e)}
-            value={searchLocation}
-            placeholder="Search Ingredients by Location"
+            onChangeText={e => setSearchConfection(e)}
+            value={searchConfection}
+            placeholder="Search Ingredients by Confection"
           />
         </View>
         {ingredients
           .filter(item => {
-            if (!searchLocation) {
+            if (!searchConfection) {
               return false;
             }
-            if (item.location.includes(searchLocation)) {
+            if (item.confectionType.includes(searchConfection)) {
               return true;
             }
           })
@@ -153,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Location;
+export default Confection;

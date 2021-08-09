@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {useSelector, useDispatch} from 'react-redux';
-import {addIngredient, editIngredients} from '../../Redux/Actions/Action';
+import {editIngredients} from '../../Redux/Actions/Action';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
+import { RootState } from '../../Redux/Reducer';
 
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
@@ -38,12 +39,11 @@ const Edit = ({navigation, route}) => {
   const [show1, setShow1] = useState(false);
 
   const dispatch = useDispatch();
-  const {ingredients} = useSelector(state => state.MainReducer);
+  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
 
   const onChangeStart = (event, selectedDate) => {
     setExpiryDate(selectedDate.toLocaleDateString());
     console.log(dayjs(new Date()));
-    // console.log(dayjs(selectedDate))
     setShow(false);
   };
 

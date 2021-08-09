@@ -1,24 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,
-  TextInput,
   ScrollView,
-  TouchableOpacity,
-  StyleSheet,
+ 
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
-import {useSelector, useDispatch} from 'react-redux';
-import {addToGroceries, getGroceries} from '../../Redux/Actions/Action';
+import {useSelector} from 'react-redux';
+import { RootState } from '../../Redux/Reducer';
 import {getShadow} from '../../utils/Shadow';
-import dayjs from 'dayjs';
-const Groceries = ({navigation}) => {
-  const dispatch = useDispatch();
-  const {groceries} = useSelector(state => state.MainReducer);
 
-  useEffect(() => {
-    console.log(groceries);
-  }, []);
+const Groceries = () => {
+  const {groceries} = useSelector((state:RootState) => state.MainReducer);
 
   return (
     <ScrollView>

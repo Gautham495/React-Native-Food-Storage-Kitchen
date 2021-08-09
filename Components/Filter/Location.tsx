@@ -4,50 +4,19 @@ import {
   Text,
   TextInput,
   ScrollView,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
+import { RootState } from '../../Redux/Reducer';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-const Category = () => {
-  const [searchCategory, setSearchCategory] = useState('');
-  const [searchConfection, setSearchConfection] = useState('');
+const Location = () => {
+  const [searchLocation, setSearchLocation] = useState('');
 
-  const dispatch = useDispatch();
-  const {ingredients} = useSelector(state => state.MainReducer);
-
-  const filterTimeOfAddition = () => {
-    const filterTime = ingredients.sort(
-      (a, b) => a.timeOfCreation - b.timeOfCreation,
-    );
-  };
-
-  const filterSameCategory = () => {
-    const filterSameCategoryData = ingredients.filter(item => {
-      if (!searchCategory) {
-        return false;
-      }
-      if (item.category.includes(searchCategory)) {
-        return true;
-      }
-    });
-  };
-
-  const filterSameConfectionType = () => {
-    const filterSameConfectionData = ingredients.filter(item => {
-      if (!searchConfection) {
-        return false;
-      }
-      if (item.confectionType.includes(searchConfection)) {
-        return true;
-      }
-    });
-  };
+  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
 
   return (
     <ScrollView>
@@ -61,19 +30,17 @@ const Category = () => {
         <View>
           <TextInput
             style={styles.input}
-            onChangeText={e => setSearchCategory(e)}
-            value={searchCategory}
-            placeholder="Search Ingredients by Category"
+            onChangeText={e => setSearchLocation(e)}
+            value={searchLocation}
+            placeholder="Search Ingredients by Location"
           />
         </View>
-
-      
         {ingredients
-         .filter(item => {
-            if (!searchCategory) {
+          .filter(item => {
+            if (!searchLocation) {
               return false;
             }
-            if (item.category.includes(searchCategory)) {
+            if (item.location.includes(searchLocation)) {
               return true;
             }
           })
@@ -187,4 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Category;
+export default Location;

@@ -13,43 +13,15 @@ import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
+import { RootState } from '../../Redux/Reducer';
 
-const Confection = () => {
+const Category = () => {
   const [searchCategory, setSearchCategory] = useState('');
-  const [searchConfection, setSearchConfection] = useState('');
 
-  const dispatch = useDispatch();
-  const {ingredients} = useSelector(state => state.MainReducer);
+  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
 
-  const filterTimeOfAddition = () => {
-    const filterTime = ingredients.sort(
-      (a, b) => a.timeOfCreation - b.timeOfCreation,
-    );
-  };
-
-  const filterSameCategory = () => {
-    const filterSameCategoryData = ingredients.filter(item => {
-      if (!searchCategory) {
-        return false;
-      }
-      if (item.category.includes(searchCategory)) {
-        return true;
-      }
-    });
-  };
-
-  const filterSameConfectionType = () => {
-    const filterSameConfectionData = ingredients.filter(item => {
-      if (!searchConfection) {
-        return false;
-      }
-      if (item.confectionType.includes(searchConfection)) {
-        return true;
-      }
-    });
-  };
-
-  return (
+ 
+   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
         <View style={{marginVertical: 10}}>
@@ -58,22 +30,22 @@ const Confection = () => {
           </Text>
         </View>
 
-       
-
         <View>
           <TextInput
             style={styles.input}
-            onChangeText={e => setSearchConfection(e)}
-            value={searchConfection}
-            placeholder="Search Ingredients by Confection"
+            onChangeText={e => setSearchCategory(e)}
+            value={searchCategory}
+            placeholder="Search Ingredients by Category"
           />
         </View>
+
+      
         {ingredients
-          .filter(item => {
-            if (!searchConfection) {
+         .filter(item => {
+            if (!searchCategory) {
               return false;
             }
-            if (item.confectionType.includes(searchConfection)) {
+            if (item.category.includes(searchCategory)) {
               return true;
             }
           })
@@ -187,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Confection;
+export default Category;
