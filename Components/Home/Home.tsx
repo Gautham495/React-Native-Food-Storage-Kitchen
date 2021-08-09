@@ -69,6 +69,7 @@ const Home = () => {
     showMode1('date');
   };
 
+
   const addIngredients = () => {
     if (name) {
       let formData = {
@@ -92,10 +93,6 @@ const Home = () => {
       setLocation('');
       setConfectionType('');
       setRipeness('');
-      // dropdownRef1.current.reset();
-      // dropdownRef2.current.reset();
-      // dropdownRef3.current.reset();
-
       dispatch(addIngredient(formData));
     } else {
       Alert.alert('Please Fill ingredient Name');
@@ -151,7 +148,11 @@ const Home = () => {
               setCategory(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem: any, index: any) => {
-              return selectedItem;
+              if (category === '') {
+                return 'Select Ingredient Category'
+              } else {
+                return selectedItem;
+              }
             }}
             rowTextForSelection={(item: any, index: any) => {
               return item;
@@ -160,7 +161,6 @@ const Home = () => {
         </View>
         <View>
           <SelectDropdown
-            // ref={dropdownRef1}
             data={locations}
             defaultButtonText={'Select Ingredient Location'}
             buttonStyle={styles.input}
@@ -173,7 +173,11 @@ const Home = () => {
               setLocation(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem: any, index: any) => {
-              return selectedItem;
+              if (location === '') {
+                return 'Select Ingredient Location'
+              } else {
+                return selectedItem;
+              }
             }}
             rowTextForSelection={(item: any, index: any) => {
               return item;
@@ -195,7 +199,11 @@ const Home = () => {
               setConfectionType(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem: any, index: any) => {
-              return selectedItem;
+              if (confectionType === '') {
+                return 'Select Confection Type'
+              } else {
+                return selectedItem;
+              }
             }}
             rowTextForSelection={(item: any, index: any) => {
               return item;
@@ -218,7 +226,11 @@ const Home = () => {
                 setRipeness(selectedItem);
               }}
               buttonTextAfterSelection={(selectedItem: any, index: any) => {
-                return selectedItem;
+                if (ripeness === '') {
+                  return 'Select Ripeness'
+                } else {
+                  return selectedItem;
+                }
               }}
               rowTextForSelection={(item: any, index: any) => {
                 return item;
@@ -281,6 +293,12 @@ const Home = () => {
                 is24Hour={true}
                 display="default"
                 onChange={onChangeStart}
+                minimumDate={new Date()}
+                maximumDate={
+                  confectionType === 'frozen'
+                    ? new Date(2022, 2, 17)
+                    : new Date(2021, 8, 17)
+                }
               />
             )}
           </View>

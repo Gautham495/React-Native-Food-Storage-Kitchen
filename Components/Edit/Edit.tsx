@@ -151,7 +151,7 @@ const Edit = ({navigation, route}) => {
             }}
             onSelect={(selectedItem, index) => {
               setCategory(selectedItem);
-              console.log(selectedItem, index);
+              
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem;
@@ -174,7 +174,7 @@ const Edit = ({navigation, route}) => {
             }}
             onSelect={(selectedItem: any, index: any) => {
               setLocation(selectedItem);
-              console.log(selectedItem, index);
+              
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem;
@@ -197,7 +197,7 @@ const Edit = ({navigation, route}) => {
             }}
             onSelect={(selectedItem, index) => {
               setConfectionType(selectedItem);
-              console.log(selectedItem, index);
+              
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem;
@@ -220,7 +220,7 @@ const Edit = ({navigation, route}) => {
               }}
               onSelect={(selectedItem, index) => {
                 setRipeness(selectedItem);
-                console.log(selectedItem, index);
+                
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
                 return selectedItem;
@@ -285,6 +285,8 @@ const Edit = ({navigation, route}) => {
                 is24Hour={true}
                 display="default"
                 onChange={onChangeStart}
+                minimumDate={new Date()}
+                maximumDate={new Date(2022, 2, 17)}
               />
             )}
           </View>

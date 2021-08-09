@@ -4,19 +4,21 @@ import {
   Text,
   TextInput,
   ScrollView,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import SelectDropdown from 'react-native-select-dropdown';
+import {useSelector, useDispatch} from 'react-redux';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
-import { RootState } from '../../Redux/Reducer';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
+import {RootState} from '../../Redux/Reducer';
 
-const Location = () => {
-  const [searchLocation, setSearchLocation] = useState('');
+const BrandName = () => {
+  const [brandName, setBrandName] = useState('');
 
-  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
+  const {ingredients} = useSelector((state: RootState) => state.MainReducer);
 
   return (
     <ScrollView>
@@ -30,21 +32,22 @@ const Location = () => {
         <View>
           <TextInput
             style={styles.input}
-            onChangeText={e => setSearchLocation(e)}
-            value={searchLocation}
-            placeholder="Search Ingredients by Location"
+            onChangeText={e => setBrandName(e)}
+            value={brandName}
+            placeholder="Search Ingredients by its Brand Name"
           />
         </View>
+
         {ingredients
-          .filter(item => {
-            if (!searchLocation) {
+          .filter((item: any) => {
+            if (!brandName) {
               return false;
             }
-            if (item.location.includes(searchLocation.toLowerCase())) {
+            if (item.brandName.includes(brandName.toLowerCase())) {
               return true;
             }
           })
-          .map(item => (
+          .map((item: any) => (
             <View
               key={Math.random()}
               style={{
@@ -154,4 +157,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Location;
+export default BrandName;

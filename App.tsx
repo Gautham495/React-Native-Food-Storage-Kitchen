@@ -18,6 +18,9 @@ import Category from './Components/Filter/Category';
 import Confection from './Components/Filter/Confection';
 import Location from './Components/Filter/Location';
 import Groceries from './Components/Groceries/Groceries';
+import Name from './Components/Filter/Name';
+import BrandName from './Components/Filter/BrandName';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -29,14 +32,51 @@ const FilterScreens = () => {
         name="Groceries List"
         component={Cart}
       />
-      <Stack.Screen name="Edit" component={Edit}  options={{headerShown: false}}/>
-      <Stack.Screen name="Filter" component={Filter}  options={{headerShown: false}} />
-      <Stack.Screen name="ElementsMissing" component={ElementsMissing}  options={{headerShown: false}} />
-      <Stack.Screen name="Category" component={Category}  options={{headerShown: false}} />
-      <Stack.Screen name="Confection" component={Confection}  options={{headerShown: false}} />
-      <Stack.Screen name="Location" component={Location}  options={{headerShown: false}} />
-      <Stack.Screen name="Groceries" component={Groceries}  options={{headerShown: false}} />
-    
+      <Stack.Screen
+        name="Edit"
+        component={Edit}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Filter"
+        component={Filter}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ElementsMissing"
+        component={ElementsMissing}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Category"
+        component={Category}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Confection"
+        component={Confection}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Location"
+        component={Location}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Groceries"
+        component={Groceries}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Name"
+        component={Name}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="BrandName"
+        component={BrandName}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

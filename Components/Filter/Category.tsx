@@ -4,11 +4,9 @@ import {
   Text,
   TextInput,
   ScrollView,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
 var relativeTime = require('dayjs/plugin/relativeTime');
@@ -43,7 +41,7 @@ const Category = () => {
             if (!searchCategory) {
               return false;
             }
-            if (item.category.includes(searchCategory)) {
+            if (item.category.includes(searchCategory.toLowerCase())) {
               return true;
             }
           })

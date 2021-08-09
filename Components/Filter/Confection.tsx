@@ -41,7 +41,7 @@ const Confection = () => {
             if (!searchConfection) {
               return false;
             }
-            if (item.confectionType.includes(searchConfection)) {
+            if (item.confectionType.includes(searchConfection.toLowerCase())) {
               return true;
             }
           })

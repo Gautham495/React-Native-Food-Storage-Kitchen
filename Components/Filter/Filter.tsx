@@ -9,28 +9,74 @@ import {
 import {useSelector} from 'react-redux';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
-import { RootState } from '../../Redux/Reducer';
+import {RootState} from '../../Redux/Reducer';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const Filter = ({navigation}) => {
-  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
+  const {ingredients} = useSelector((state: RootState) => state.MainReducer);
 
   return (
     <ScrollView>
       <View style={{alignItems: 'center'}}>
-      <View style={{marginVertical: 10, marginTop:30}}>
+        <View style={{marginVertical: 10, marginTop: 30}}>
           <Text
             style={{
               color: 'black',
               fontSize: 20,
               fontFamily: 'Poppins-Medium',
             }}>
-            Filter Ingredients 
+            Filter Ingredients
           </Text>
         </View>
 
         <View style={{marginVertical: 10, marginTop: 30}}>
+          <View>
+            <TouchableOpacity
+              style={{
+                alignItems: 'center',
+                backgroundColor: 'blue',
+                borderRadius: 10,
+                ...getShadow(1),
+                width: 250,
+                padding: 10,
+                marginBottom: 10,
+                marginHorizontal: 10,
+              }}
+              onPress={() => navigation.navigate('Name')}>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-Medium',
+                  color: 'white',
+                  fontSize: 17,
+                }}>
+                Search Ingredients by Name
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity
+              style={{
+                alignItems: 'center',
+                backgroundColor: 'blue',
+                borderRadius: 10,
+                ...getShadow(1),
+                width: 250,
+                padding: 10,
+                marginBottom: 10,
+                marginHorizontal: 10,
+              }}
+              onPress={() => navigation.navigate('BrandName')}>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-Medium',
+                  color: 'white',
+                  fontSize: 17,
+                }}>
+                Search Ingredients by Brand Name
+              </Text>
+            </TouchableOpacity>
+          </View>
           <View>
             <TouchableOpacity
               style={{
