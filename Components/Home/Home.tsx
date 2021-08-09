@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {useDispatch} from 'react-redux';
@@ -17,8 +18,10 @@ import dayjs from 'dayjs';
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
-const Home = ({navigation}) => {
+const Home = () => {
   const [name, setName] = useState('');
+  const [brandName, setBrandName] = useState('');
+
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
   const [confectionType, setConfectionType] = useState('');
@@ -37,13 +40,13 @@ const Home = ({navigation}) => {
 
   const dispatch = useDispatch();
 
-  const onChangeStart = (event, selectedDate) => {
+  const onChangeStart = (event: any, selectedDate: any) => {
     setExpiryDate(selectedDate.toLocaleDateString());
     console.log(dayjs(new Date()));
     setShow(false);
   };
 
-  const showMode = currentMode => {
+  const showMode = (currentMode: any) => {
     setShow(true);
     setMode(currentMode);
   };
@@ -52,12 +55,12 @@ const Home = ({navigation}) => {
     showMode('date');
   };
 
-  const onChangeStart1 = (event, selectedDate) => {
+  const onChangeStart1 = (event: any, selectedDate: any) => {
     setEntryDate(selectedDate.toLocaleDateString());
     setShow1(false);
   };
 
-  const showMode1 = currentMode => {
+  const showMode1 = (currentMode: any) => {
     setShow1(true);
     setMode1(currentMode);
   };
@@ -71,6 +74,7 @@ const Home = ({navigation}) => {
       let formData = {
         id: Math.random(),
         ingredientName: name,
+        brandName: brandName,
         expiryDate: expiryDate,
         entryDate: entryDate,
         category: category,
@@ -81,6 +85,7 @@ const Home = ({navigation}) => {
       };
 
       setName('');
+      setBrandName('');
       setEntryDate('');
       setExpiryDate('');
       setCategory('');
@@ -93,20 +98,13 @@ const Home = ({navigation}) => {
 
       dispatch(addIngredient(formData));
     } else {
-      alert('Please Fill ingredient Name');
+      Alert.alert('Please Fill ingredient Name');
     }
   };
 
   const ripenessList = ['green', 'ripe/matured', 'advanced', 'too ripe'];
 
-  const categories = [
-    'fruit',
-    'vegetable',
-    'dairy',
-    'fish',
-    'meat',
-    'liquid',
-  ];
+  const categories = ['fruit', 'vegetable', 'dairy', 'fish', 'meat', 'liquid'];
   const locations = ['pantry', 'fridge', 'freezer'];
   const confectionTypes = ['fresh', 'canned', 'frozen', 'cured'];
 
@@ -132,6 +130,14 @@ const Home = ({navigation}) => {
           />
         </View>
         <View>
+          <TextInput
+            style={styles.input}
+            onChangeText={e => setBrandName(e)}
+            value={brandName}
+            placeholder="Brand Name"
+          />
+        </View>
+        <View>
           <SelectDropdown
             data={categories}
             defaultButtonText={'Select Ingredient Category'}
@@ -141,14 +147,13 @@ const Home = ({navigation}) => {
               fontSize: 14,
               fontFamily: 'Poppins-Medium',
             }}
-            onSelect={(selectedItem, index) => {
+            onSelect={(selectedItem: any, index: any) => {
               setCategory(selectedItem);
-              console.log(selectedItem, index);
             }}
-            buttonTextAfterSelection={(selectedItem, index) => {
+            buttonTextAfterSelection={(selectedItem: any, index: any) => {
               return selectedItem;
             }}
-            rowTextForSelection={(item, index) => {
+            rowTextForSelection={(item: any, index: any) => {
               return item;
             }}
           />
@@ -164,14 +169,13 @@ const Home = ({navigation}) => {
               fontSize: 14,
               fontFamily: 'Poppins-Medium',
             }}
-            onSelect={(selectedItem, index) => {
+            onSelect={(selectedItem: any, index: any) => {
               setLocation(selectedItem);
-              console.log(selectedItem, index);
             }}
-            buttonTextAfterSelection={(selectedItem, index) => {
+            buttonTextAfterSelection={(selectedItem: any, index: any) => {
               return selectedItem;
             }}
-            rowTextForSelection={(item, index) => {
+            rowTextForSelection={(item: any, index: any) => {
               return item;
             }}
           />
@@ -187,14 +191,13 @@ const Home = ({navigation}) => {
               fontSize: 14,
               fontFamily: 'Poppins-Medium',
             }}
-            onSelect={(selectedItem, index) => {
+            onSelect={(selectedItem: any, index: any) => {
               setConfectionType(selectedItem);
-              console.log(selectedItem, index);
             }}
-            buttonTextAfterSelection={(selectedItem, index) => {
+            buttonTextAfterSelection={(selectedItem: any, index: any) => {
               return selectedItem;
             }}
-            rowTextForSelection={(item, index) => {
+            rowTextForSelection={(item: any, index: any) => {
               return item;
             }}
           />
@@ -211,14 +214,13 @@ const Home = ({navigation}) => {
                 fontSize: 14,
                 fontFamily: 'Poppins-Medium',
               }}
-              onSelect={(selectedItem, index) => {
+              onSelect={(selectedItem: any, index: any) => {
                 setRipeness(selectedItem);
-                console.log(selectedItem, index);
               }}
-              buttonTextAfterSelection={(selectedItem, index) => {
+              buttonTextAfterSelection={(selectedItem: any, index: any) => {
                 return selectedItem;
               }}
-              rowTextForSelection={(item, index) => {
+              rowTextForSelection={(item: any, index: any) => {
                 return item;
               }}
             />

@@ -19,7 +19,6 @@ const Category = () => {
   const [searchCategory, setSearchCategory] = useState('');
 
   const {ingredients} = useSelector((state:RootState) => state.MainReducer);
-
  
    return (
     <ScrollView>
@@ -40,8 +39,7 @@ const Category = () => {
         </View>
 
       
-        {ingredients
-         .filter(item => {
+        {ingredients.filter((item:any) => {
             if (!searchCategory) {
               return false;
             }
@@ -49,7 +47,7 @@ const Category = () => {
               return true;
             }
           })
-          .map(item => (
+          .map((item:any) => (
             <View
               key={Math.random()}
               style={{

@@ -6,20 +6,22 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  Alert
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {editIngredients} from '../../Redux/Actions/Action';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
-import { RootState } from '../../Redux/Reducer';
 
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 const Edit = ({navigation, route}) => {
   const [name, setName] = useState(route.params.ingredientName);
+  const [brandName, setBrandName] = useState(route.params.brandName);
+
   const [category, setCategory] = useState(route.params.category);
   const [location, setLocation] = useState(route.params.location);
   const [confectionType, setConfectionType] = useState(
@@ -39,7 +41,6 @@ const Edit = ({navigation, route}) => {
   const [show1, setShow1] = useState(false);
 
   const dispatch = useDispatch();
-  const {ingredients} = useSelector((state:RootState) => state.MainReducer);
 
   const onChangeStart = (event, selectedDate) => {
     setExpiryDate(selectedDate.toLocaleDateString());
@@ -75,6 +76,7 @@ const Edit = ({navigation, route}) => {
       let formData = {
         id: route.params.id,
         ingredientName: name,
+        brandName: brandName,
         expiryDate: expiryDate,
         entryDate: entryDate,
         category: category,
@@ -85,22 +87,19 @@ const Edit = ({navigation, route}) => {
       };
 
       setName('');
+      setBrandName('');
+
       setEntryDate('');
       setExpiryDate('');
       setCategory('');
       setLocation('');
       setConfectionType('');
-      setRipeness('')
+      setRipeness('');
       navigation.navigate('Cart');
-
-      console.log(route.params.id)
-      
-      console.log(ingredients.filter((item)=>item.id ===route.params.id))
-      
 
       dispatch(editIngredients(formData));
     } else {
-      alert('Please Fill ingredient Name');
+      Alert.alert('Please Fill ingredient Name');
     }
   };
 
@@ -129,6 +128,14 @@ const Edit = ({navigation, route}) => {
             onChangeText={e => setName(e)}
             value={name}
             placeholder="Ingredient Name"
+          />
+        </View>
+        <View>
+          <TextInput
+            style={styles.input}
+            onChangeText={e => setBrandName(e)}
+            value={brandName}
+            placeholder="Brand Name"
           />
         </View>
         <View>
@@ -165,7 +172,7 @@ const Edit = ({navigation, route}) => {
               fontSize: 14,
               fontFamily: 'Poppins-Medium',
             }}
-            onSelect={(selectedItem, index) => {
+            onSelect={(selectedItem: any, index: any) => {
               setLocation(selectedItem);
               console.log(selectedItem, index);
             }}

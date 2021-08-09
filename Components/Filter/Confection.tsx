@@ -28,9 +28,6 @@ const Confection = () => {
             Filter
           </Text>
         </View>
-
-       
-
         <View>
           <TextInput
             style={styles.input}

@@ -1,16 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
- 
-} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
-import { RootState } from '../../Redux/Reducer';
+import {RootState} from '../../Redux/Reducer';
 import {getShadow} from '../../utils/Shadow';
 
 const Groceries = () => {
-  const {groceries} = useSelector((state:RootState) => state.MainReducer);
+  const {groceries} = useSelector((state: RootState) => state.MainReducer);
 
   return (
     <ScrollView>
@@ -22,7 +17,7 @@ const Groceries = () => {
         </View>
 
         <View>
-          {groceries.map(item => (
+          {groceries.map((item: any) => (
             <View
               key={Math.random()}
               style={{

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   StyleSheet,
@@ -40,8 +40,10 @@ const BarCode = () => {
     <View style={{flex: 1}}>
       <BarcodeScanner
         style={{flex: 1}}
-        onBarcodeRead={({data, type}) => {
-          Alert.alert(`Barcode '${data}' of type '${type}' was scanned.`);
+        onBarcodeRead={(item: any) => {
+          Alert.alert(
+            `Barcode '${item.data}' of type '${item.type}' was scanned.`,
+          );
         }}
       />
     </View>
