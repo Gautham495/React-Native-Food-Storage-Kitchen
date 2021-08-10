@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {getShadow} from '../../utils/Shadow';
 import dayjs from 'dayjs';
 var relativeTime = require('dayjs/plugin/relativeTime');
@@ -43,7 +42,7 @@ const Name = () => {
             if (!name) {
               return false;
             }
-            if (item.name.includes(name.toLowerCase())) {
+            if (item.ingredientName.includes(name.toLowerCase())) {
               return true;
             }
           })
